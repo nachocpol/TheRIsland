@@ -1,0 +1,309 @@
+int cx = x;
+  int cz = z;
+
+  glm::vec3 bl, br, tr, tl;
+  glm::vec3 lbl, lbr, ltr, ltl;
+  glm::vec3 blbl, blbr, bltr, bltl;
+  glm::vec3 bbl, bbr, btr, btl;
+  glm::vec3 brbl, brbr, brtr, brtl;
+  glm::vec3 rbl, rbr, rtr, rtl;
+  glm::vec3 trbl, trbr, trtr, trtl;
+  glm::vec3 tbl, tbr, ttr, ttl;
+  glm::vec3 tlbl, tlbr, tltr, tltl;
+
+  //Use noise data
+  if (bMode == kPerlin)
+  {
+    //Cur quad
+    bl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    br = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    tr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    tl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Left quad
+    cx = x - 1;
+    cz = z;
+    lbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    lbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    ltr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    ltl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Bottom left quad
+    cx = x - 1;
+    cz = z - 1;
+    blbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    blbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    bltr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    bltl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Bottom quad
+    cx = x;
+    cz = z - 1;
+    bbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    bbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    btr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    btl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Bottom right quad
+    cx = x + 1;
+    cz = z - 1;
+    brbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    brbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    brtr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    brtl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Right quad
+    cx = x + 1;
+    cz = z;
+    rbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    rbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    rtr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    rtl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Top right quad
+    cx = x + 1;
+    cz = z + 1;
+    trbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    trbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    trtr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    trtl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Top quad
+    cx = x;
+    cz = z + 1;
+    tbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    tbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    ttr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    ttl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+
+    //Top left quad
+    cx = x - 1;
+    cz = z + 1;
+    tlbl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz)*mult, cz);
+    tlbr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz)*mult, cz);
+    tltr = glm::vec3(cx + qSize, octave_noise_2d(octaves, persistance, scale, cx + qSize, cz + qSize)*mult, cz + qSize);
+    tltl = glm::vec3(cx, octave_noise_2d(octaves, persistance, scale, cx, cz + qSize)*mult, cz + qSize);
+  }
+
+  //Use heightmap data
+  else if (bMode == kHeightMap)
+  {
+    //Cur quad
+    bl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    br = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    tr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    tl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Left quad
+    cx = x - 1;
+    cz = z;
+    lbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    lbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    ltr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    ltl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Bottom left quad
+    cx = x - 1;
+    cz = z - 1;
+    blbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    blbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    bltr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    bltl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Bottom quad
+    cx = x;
+    cz = z - 1;
+    bbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    bbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    btr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    btl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Bottom right quad
+    cx = x + 1;
+    cz = z - 1;
+    brbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    brbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    brtr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    brtl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Right quad
+    cx = x + 1;
+    cz = z;
+    rbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    rbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    rtr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    rtl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Top right quad
+    cx = x + 1;
+    cz = z + 1;
+    trbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    trbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    trtr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    trtl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Top quad
+    cx = x;
+    cz = z + 1;
+    tbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    tbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    ttr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    ttl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+
+    //Top left quad
+    cx = x - 1;
+    cz = z + 1;
+    tlbl = glm::vec3(cx, GetHeight(x, z)*hScale, cz);
+    tlbr = glm::vec3(cx + qSize, GetHeight(x + qSize, z)*hScale, cz);
+    tltr = glm::vec3(cx + qSize, GetHeight(x + qSize, z + qSize)*hScale, cz + qSize);
+    tltl = glm::vec3(cx, GetHeight(x, z + qSize)*hScale, cz + qSize);
+  }
+
+
+  glm::vec3 n1, n2, n3, n4, n5, n6;
+
+  //Normal cur bl
+  glm::vec3 cbln(0, 1, 0);
+
+  glm::vec3 a = bltl - bl;
+  glm::vec3 b = blbl - bl;
+  n1 = glm::normalize(glm::cross(a, b));
+  //cbln = glm::mix(cbln, n, 0.5f);
+
+  a = b;
+  b = blbr - bl;
+  n2 = glm::normalize(glm::cross(a, b));
+  //cbln = glm::mix(cbln, n, 0.5f);
+
+  a = b;
+  b = btr - bl;
+  n3 = glm::normalize(glm::cross(a, b));
+  //cbln = glm::mix(cbln, n, 0.5f);
+
+  a = b;
+  b = tr - bl;
+  n4 = glm::normalize(glm::cross(a, b));
+  //cbln = glm::mix(cbln, n, 0.5f);
+
+  a = b;
+  b = tl - bl;
+  n5 = glm::normalize(glm::cross(a, b));
+  //cbln = glm::mix(cbln, n, 0.5f);
+
+  a = b;
+  b = lbl - bl;
+  n6 = glm::normalize(glm::cross(a, b));
+  //cbln = glm::mix(cbln, n, 0.5f);
+
+  cbln = (n1 + n2 + n3 + n4 + n5 + n6) / 6.0f;
+
+  //Normal cur br
+  glm::vec3 cbrn(0, 1, 0);
+
+  a = bl - br;
+  b = bbl - br;
+  n1 = glm::normalize(glm::cross(a, b));
+  //cbrn = glm::mix(cbrn, n, 0.5f);
+
+  a = b;
+  b = bbr - br;
+  n2 = glm::normalize(glm::cross(a, b));
+  //cbrn = glm::mix(cbrn, n, 0.5f);
+
+  a = b;
+  b = brtr - br;
+  n3 = glm::normalize(glm::cross(a, b));
+  //cbrn = glm::mix(cbrn, n, 0.5f);
+
+  a = b;
+  b = rtr - br;
+  n4 = glm::normalize(glm::cross(a, b));
+  //cbrn = glm::mix(cbrn, n, 0.5f);
+
+  a = b;
+  b = rtl - br;
+  n5 = glm::normalize(glm::cross(a, b));
+  //cbrn = glm::mix(cbrn, n, 0.5f);
+
+  a = b;
+  b = bl - br;
+  n6 = glm::normalize(glm::cross(a, b));
+  //cbrn = glm::mix(cbrn, n, 0.5f);
+
+  cbrn = (n1 + n2 + n3 + n4 + n5 + n6) / 6.0f;
+
+  //Normal cur tr
+  glm::vec3 ctrn(0, 1, 0);
+
+  a = tl - tr;
+  b = bl - tr;
+  n1 = glm::normalize(glm::cross(a, b));
+  //ctrn = glm::mix(ctrn,n,0.5f);
+
+  a = b;
+  b = br - tr;
+  n2 = glm::normalize(glm::cross(a, b));
+  //ctrn = glm::mix(ctrn, n, 0.5f);
+
+  a = b;
+  b = rtr - tr;
+  n3 = glm::normalize(glm::cross(a, b));
+  //ctrn = glm::mix(ctrn, n, 0.5f);
+
+  a = b;
+  b = trtr - tr;
+  n4 = glm::normalize(glm::cross(a, b));
+  //ctrn = glm::mix(ctrn, n, 0.5f);
+
+  a = b;
+  b = trtl - tr;
+  n5 = glm::normalize(glm::cross(a, b));
+  //ctrn = glm::mix(ctrn, n, 0.5f);
+
+  a = b;
+  b = tbl - tr;
+  n6 = glm::normalize(glm::cross(a, b));
+  //ctrn = glm::mix(ctrn, n, 0.5f);
+
+  ctrn = (n1 + n2 + n3 + n4 + n5 + n6) / 6.0f;
+
+  //Normal cur tl
+  glm::vec3 ctln(0, 1, 0);
+
+  a = ltl - tl;
+  b = lbl - tl;
+  n1 = glm::normalize(glm::cross(a, b));
+  //ctln = glm::mix(ctln, n, 0.5f);
+
+  a = b;
+  b = lbr - tl;
+  n2 = glm::normalize(glm::cross(a, b));
+  //ctln = glm::mix(ctln, n, 0.5f);
+
+  a = b;
+  b = tr - tl;
+  n3 = glm::normalize(glm::cross(a, b));
+  //ctln = glm::mix(ctln, n, 0.5f);
+
+  a = b;
+  b = ttr - tl;
+  n4 = glm::normalize(glm::cross(a, b));
+  //ctln = glm::mix(ctln, n, 0.5f);
+
+  a = b;
+  b = ttl - tl;
+  n5 = glm::normalize(glm::cross(a, b));
+  //ctln = glm::mix(ctln, n, 0.5f);
+
+  a = b;
+  b = tlbl - tl;
+  n6 = glm::normalize(glm::cross(a, b));
+  //ctln = glm::mix(ctln, n, 0.5f);
+
+  ctln = (n1 + n2 + n3 + n4 + n5 + n6) / 6.0f;
+
+  //Build the returned normal
+  glm::vec3 fN = (cbln + cbrn + ctrn + ctln) / 4.0f;
+  fN.y = glm::abs(fN.y);
+
+  return fN;

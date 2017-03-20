@@ -1,0 +1,15 @@
+vsproject/
+lib/
+build/
+depen/
+genie.exe
+sublimeproject/
+GraphicsDemoSolution.sdf
+GraphicsDemoSolution.sln
+GraphicsDemoSolution.opensdf
+GraphicsDemoSolution.v12.suo
+data/img/
+data/models/
+data/imported/
+cortizopoGraphicsDemoWork.rar
+*.rar
